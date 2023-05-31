@@ -12,21 +12,6 @@ Some of the checklists in this doc are for **C4 (🐺)** and some of them are fo
 
 ---
 
-# Audit setup
-
-## 🐺 C4: Set up repos
-- [ ] Create a new private repo named `YYYY-MM-sponsorname` using this repo as a template.
-- [ ] Rename this repo to reflect audit date (if applicable)
-- [ ] Rename auditt H1 below
-- [ ] Update pot sizes
-- [ ] Fill in start and end times in audit bullets below
-- [ ] Add link to submission form in audit details below
-- [ ] Add the information from the scoping form to the "Scoping Details" section at the bottom of this readme.
-- [ ] Add matching info to the Code4rena site
-- [ ] Add sponsor to this private repo with 'maintain' level access.
-- [ ] Send the sponsor contact the url for this repo to follow the instructions below and add contracts here. 
-- [ ] Delete this checklist.
-
 # Repo setup
 
 ## ⭐️ Sponsor: Add code to this repo
@@ -62,25 +47,18 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 
 ---
 
-# Sponsorname audit details
-- Total Prize Pool: XXX XXX USDC (Notion: Total award pool)
-  - HM awards: XXX XXX USDC (Notion: HM (main) pool)
-  - QA awards: XXX XXX USDC (Notion: QA pool)
-  - Bot Race awards: XXX XXX USDC (Notion: Bot Race pool)
-  - Gas awards: XXX XXX USDC (Notion: Gas pool)
-  - Judge awards: XXX XXX USDC (Notion: Judge Fee)
-  - Lookout awards: XXX XXX USDC (Notion: Sum of Pre-sort fee + Pre-sort early bonus)
-  - Scout awards: $500 USDC (Notion: Scout fee - but usually $500 USDC)
-  - (this line can be removed if there is no mitigation) Mitigation Review: XXX XXX USDC (*Opportunity goes to top 3 certified wardens based on placement in this audit.*)
+# Stader Labs audit details
+- Total Prize Pool: $93,000 USDC
+[ 🐺 C4 staff to add detailed pool breakdown ]
 - Join [C4 Discord](https://discord.gg/code4rena) to register
-- Submit findings [using the C4 form](https://code4rena.com/contests/YYYY-MM-sponsorName-contest/submit)
+- Submit findings [using the C4 form](https://code4rena.com/contests/2023-06-stader-contest/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
-- Starts TBD XXX XXX XX 20:00 UTC (ex. `Starts March 22, 2023 20:00 UTC`)
-- Ends TBD XXX XXX XX 20:00 UTC (ex. `Ends March 30, 2023 20:00 UTC`)
+- Starts June 2, 2023 20:00 UTC
+- Ends June 9, 2023 20:00 UTC
 
 ## Automated Findings / Publicly Known Issues
 
-Automated findings output for the audit can be found [here](add link to report) within 24 hours of audit opening.
+Automated findings output for the audit will be posted [here](#) within 24 hours of audit opening.
 
 *Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
 
@@ -89,6 +67,8 @@ Automated findings output for the audit can be found [here](add link to report) 
 # Overview
 
 *Please provide some context about the code being audited, and identify any areas of specific concern in reviewing the code. (This is a good place to link to your docs, if you have them.)*
+
+Please focus on vaultProxy, vaultFactory, and PoolSelector.
 
 # Scope
 
@@ -112,26 +92,28 @@ Automated findings output for the audit can be found [here](add link to report) 
 
 ## Scoping Details 
 ```
-- If you have a public code repo, please share it here:  
-- How many contracts are in scope?:   
-- Total SLoC for these contracts?:  
-- How many external imports are there?:  
-- How many separate interfaces and struct definitions are there for the contracts within scope?:  
-- Does most of your code generally use composition or inheritance?:   
-- How many external calls?:   
-- What is the overall line coverage percentage provided by your tests?:  
-- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?:   
-- Please describe required context:   
-- Does it use an oracle?:  
+- If you have a public code repo, please share it here: https://github.com/stader-labs/ethx/tree/phase2/contracts
+- How many contracts are in scope?: 23
+- Total SLoC for these contracts?: 3494
+- How many external imports are there?: 0
+- How many separate interfaces and struct definitions are there for the contracts within scope?: 23 interfaces, 7 structs
+- Does most of your code generally use composition or inheritance?: Composition
+- How many external calls?: 0
+- What is the overall line coverage percentage provided by your tests?: 85
+- Is this an upgrade of an existing system? No
+- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?: Yes
+- Please describe required context: https://miro.com/app/board/uXjVMDv5XKo=/
+- Does it use an oracle?: Yes - Custom oracle that is reflected in StaderOracle.sol
 - Does the token conform to the ERC20 standard?:  
-- Are there any novel or unique curve logic or mathematical models?: 
-- Does it use a timelock function?:  
-- Is it an NFT?: 
-- Does it have an AMM?:   
-- Is it a fork of a popular project?:   
-- Does it use rollups?:   
-- Is it multi-chain?:  
-- Does it use a side-chain?: 
+- Are there any novel or unique curve logic or mathematical models?: Yes - Any validator in permissionless pool can run a node with 4 ETH + 0.4 ETH worth of SD token. Rewards are split proportionately.
+- Does it use a timelock function?: No
+- Is it an NFT?: No
+- Does it have an AMM?: No
+- Is it a fork of a popular project?: No 
+- Does it use rollups?: No
+- Is it multi-chain?: No
+- Does it use a side-chain?: No
+
 ```
 
 # Tests
