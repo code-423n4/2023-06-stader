@@ -61,7 +61,7 @@ Please focus on vaultProxy, vaultFactory, and PoolSelector.
 
 ## Scoping Details 
 ```
-- If you have a public code repo, please share it here: https://github.com/stader-labs/ethx/tree/phase2/contracts
+- If you have a public code repo, please share it here:
 - How many contracts are in scope?: 23
 - Total SLoC for these contracts?: 4348
 - How many external imports are there?: 0
