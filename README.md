@@ -12,14 +12,18 @@
 Automated findings output for the audit will be posted [here](#) within 24 hours of audit opening.
 
 *Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
-
 [ ⭐️ SPONSORS ADD INFO HERE ]
 
 # Overview
 ETHx is a multi pool architecture for node operations, designed for decentralization, scalability, and resilience. This design is integral to our ability to democratize node operations and adapt to increasing demand.
 Our structure includes a permissionless pool, where anyone can participate and operate nodes, thereby fostering widespread participation. Alongside this, we also feature a permissioned pool. This is a select group of validators known for their consistent high performance.
 
-Please focus on vaultProxy, vaultFactory, and PoolSelector.
+- ETHx architecture miro board - https://miro.com/app/board/uXjVMDv5XKo=/
+- Node Operator Onboarding blog - https://blog.staderlabs.com/node-operator-onboarding-ced79d35bd7b
+- Deposit blog - https://blog.staderlabs.com/ethx-deposits-bda0f62d8ed8
+- Reward Withdrawal blog - https://blog.staderlabs.com/ethx-rewards-withdrawal-530c50d480c9
+
+Focus areas - vaultProxy, vaultFactory, PoolSelector, staderOracle contracts
 
 # Scope
 
@@ -49,15 +53,8 @@ Please focus on vaultProxy, vaultFactory, and PoolSelector.
 | [contracts/library/UtilLib.sol](contracts/library/UtilLib.sol) | 143 | Perform check on msg.sender, check for roles and get operator data given validatorID | []() |
 | [contracts/library/ValidatorStatus.sol](contracts/library/ValidatorStatus.sol) | 9 | List of stader defined validator status | []() |
 
-## Out of scope
-
-*List any files/contracts that are out of scope for this audit.*
-
 # Additional Context
 
-*Describe any novel or unique curve logic or mathematical models implemented in the contracts*
-
-*Sponsor, please confirm/edit the information below.*
 
 ## Scoping Details 
 ```
