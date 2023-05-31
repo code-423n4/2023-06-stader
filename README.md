@@ -20,7 +20,6 @@ ETHx is a multi pool architecture for node operations, designed for decentraliza
 Our structure includes a permissionless pool, where anyone can participate and operate nodes, thereby fostering widespread participation. Alongside this, we also feature a permissioned pool. This is a select group of validators known for their consistent high performance.
 
 Please focus on vaultProxy, vaultFactory, and PoolSelector.
-https://miro.com/app/board/uXjVMDv5XKo=/
 
 # Scope
 
