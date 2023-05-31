@@ -396,7 +396,7 @@ contract PermissionedNodeRegistryTest is Test {
     }
 
     function test_updateInputKeyCountLimit(uint16 _keyCountLimit) public {
-        vm.prank(staderManager);
+        vm.prank(operator);
         nodeRegistry.updateInputKeyCountLimit(_keyCountLimit);
         assertEq(nodeRegistry.inputKeyCountLimit(), _keyCountLimit);
     }
