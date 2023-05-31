@@ -29,29 +29,29 @@ Focus areas - vaultProxy, vaultFactory, PoolSelector, staderOracle contracts
 
 | Contract | SLOC | Purpose | Libraries used |  
 | ----------- | ----------- | ----------- | ----------- |
-| [contracts/Auction.sol](contracts/Auction.sol) | 116 | create auction lot for SD token, manage bid and transfer highest bid ETH to StaderStakePoolManager contract | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/ETHx.sol](contracts/ETHx.sol) | 50 | The ERC20 contract for the ETHx token | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/NodeELRewardVault.sol](contracts/NodeELRewardVault.sol) | 32 | Distribution logic for Execution layer reward for operators opted out of socializing pool  | []() |
-| [contracts/OperatorRewardsCollector.sol](contracts/OperatorRewardsCollector.sol) | 39 | stores operator rewards/settled amount for operator to claim | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/Penalty.sol](contracts/Penalty.sol) | 106 | store validator level penalty data, update penalty based on MEV Theft/missed attestation data | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/PermissionedNodeRegistry.sol](contracts/PermissionedNodeRegistry.sol) | 524 | Handles Permissioned Operator onboarding, adding validator keys,  validator selection within operators to depsoit on beacon chain and maintains validator and operator registry| [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/PermissionedPool.sol](contracts/PermissionedPool.sol) | 252 | Interact with Ethereum Deposit Contract to do PRE_DEPOSIT and Full Deposit | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/PermissionlessNodeRegistry.sol](contracts/PermissionlessNodeRegistry.sol) | 502 | Handle Permissionless Operators onboarding, adding validator keys with a collateral of 4ETH per validator and maintains validator and operator registry  | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/PermissionlessPool.sol](contracts/PermissionlessPool.sol) | 216 | Interact with Ethereum deposit contract to do PRE_DEPOSIT and Full Deposit | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/PoolSelector.sol](contracts/PoolSelector.sol) | 108 | stores pool target weight, computes validator number to register on beacon chain based on pooled ETH and pool target and handle excess ETH allocation to pools if pool does not have capacity in a round robin way | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/PoolUtils.sol](contracts/PoolUtils.sol) | 232 | provides data across all pools like total queued validator count, total active validator count along with performing checks like unique pubkey, uinque operator address across all pools | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/SDCollateral.sol](contracts/SDCollateral.sol) | 172 | handles SD token deposit for collateral, check for SD collateral based on pool, withdraw of excess SD token | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/SocializingPool.sol](contracts/SocializingPool.sol) | 180 | Handle Execution Layer reward distribution for permissioned pool and permissionless operator which opted-in for socializing pool, reward data is pushed in form of merkle tree by staderOracle | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/StaderConfig.sol](contracts/StaderConfig.sol) | 374 | store the address of all other contracts and allow to update them via admin | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/StaderInsuranceFund.sol](contracts/StaderInsuranceFund.sol) | 52 | Reimburse 1ETH ETH lost in case a permissioned NO submit invalid signature key | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/StaderOracle.sol](contracts/StaderOracle.sol) | 589 | Submit Exchange Rate, SD Price, Withdrawn validator, Missed attestation penalty, socializing pool reward merkles along with Validator status data via trusted node | [`@openzeppelin/*`](https://openzeppelin.com/contracts/)[`@chainlink/*`](https://github.com/smartcontractkit/chainlink/blob/develop/contracts/) |
-| [contracts/StaderStakePoolsManager.sol](contracts/StaderStakePoolsManager.sol) | 213 | handle user staking ETH, minting ETHx, receiving user share of rewards from validators across all pools and validatorBatch Deposit based on the pooled ETH amount | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/UserWithdrawalManager.sol](contracts/UserWithdrawalManager.sol) | 176 | handle user unstake and claiming for requests along with buring ETHx for withdraw request | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/ValidatorWithdrawalVault.sol](contracts/ValidatorWithdrawalVault.sol) | 125 | handle consensus layer reward distribution and settlement in case validator is withdrawn  | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/VaultProxy.sol](contracts/VaultProxy.sol) | 56 | router contract for all ValidatorWithdrawalVault and NodeELRewardVault contracts, delegate calls to specific vault via fallback | []() |
-| [contracts/factory/VaultFactory.sol](contracts/factory/VaultFactory.sol) | 77 | Deploys vaultProxy implementation via clones | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-| [contracts/library/UtilLib.sol](contracts/library/UtilLib.sol) | 143 | Perform check on msg.sender, check for roles and get operator data given validatorID | []() |
-| [contracts/library/ValidatorStatus.sol](contracts/library/ValidatorStatus.sol) | 9 | List of stader defined validator status | []() |
+| [contracts/Auction.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/Auction.sol) | 116 | create auction lot for SD token, manage bid and transfer highest bid ETH to StaderStakePoolManager contract | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/ETHx.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/ETHx.sol) | 50 | The ERC20 contract for the ETHx token | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/NodeELRewardVault.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/NodeELRewardVault.sol) | 32 | Distribution logic for Execution layer reward for operators opted out of socializing pool  | []() |
+| [contracts/OperatorRewardsCollector.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/OperatorRewardsCollector.sol) | 39 | stores operator rewards/settled amount for operator to claim | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/Penalty.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/Penalty.sol) | 106 | store validator level penalty data, update penalty based on MEV Theft/missed attestation data | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/PermissionedNodeRegistry.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/PermissionedNodeRegistry.sol) | 524 | Handles Permissioned Operator onboarding, adding validator keys,  validator selection within operators to depsoit on beacon chain and maintains validator and operator registry| [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/PermissionedPool.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/PermissionedPool.sol) | 252 | Interact with Ethereum Deposit Contract to do PRE_DEPOSIT and Full Deposit | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/PermissionlessNodeRegistry.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/PermissionlessNodeRegistry.sol) | 502 | Handle Permissionless Operators onboarding, adding validator keys with a collateral of 4ETH per validator and maintains validator and operator registry  | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/PermissionlessPool.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/PermissionlessPool.sol) | 216 | Interact with Ethereum deposit contract to do PRE_DEPOSIT and Full Deposit | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/PoolSelector.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/PoolSelector.sol) | 108 | stores pool target weight, computes validator number to register on beacon chain based on pooled ETH and pool target and handle excess ETH allocation to pools if pool does not have capacity in a round robin way | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/PoolUtils.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/PoolUtils.sol) | 232 | provides data across all pools like total queued validator count, total active validator count along with performing checks like unique pubkey, uinque operator address across all pools | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/SDCollateral.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/SDCollateral.sol) | 172 | handles SD token deposit for collateral, check for SD collateral based on pool, withdraw of excess SD token | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/SocializingPool.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/SocializingPool.sol) | 180 | Handle Execution Layer reward distribution for permissioned pool and permissionless operator which opted-in for socializing pool, reward data is pushed in form of merkle tree by staderOracle | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/StaderConfig.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/StaderConfig.sol) | 374 | store the address of all other contracts and allow to update them via admin | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/StaderInsuranceFund.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/StaderInsuranceFund.sol) | 52 | Reimburse 1ETH ETH lost in case a permissioned NO submit invalid signature key | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/StaderOracle.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/StaderOracle.sol) | 589 | Submit Exchange Rate, SD Price, Withdrawn validator, Missed attestation penalty, socializing pool reward merkles along with Validator status data via trusted node | [`@openzeppelin/*`](https://openzeppelin.com/contracts/)[`@chainlink/*`](https://github.com/smartcontractkit/chainlink/blob/develop/contracts/) |
+| [contracts/StaderStakePoolsManager.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/StaderStakePoolsManager.sol) | 213 | handle user staking ETH, minting ETHx, receiving user share of rewards from validators across all pools and validatorBatch Deposit based on the pooled ETH amount | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/UserWithdrawalManager.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/UserWithdrawalManager.sol) | 176 | handle user unstake and claiming for requests along with buring ETHx for withdraw request | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/ValidatorWithdrawalVault.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/ValidatorWithdrawalVault.sol) | 125 | handle consensus layer reward distribution and settlement in case validator is withdrawn  | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/VaultProxy.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/VaultProxy.sol) | 56 | router contract for all ValidatorWithdrawalVault and NodeELRewardVault contracts, delegate calls to specific vault via fallback | []() |
+| [contracts/factory/VaultFactory.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/factory/VaultFactory.sol) | 77 | Deploys vaultProxy implementation via clones | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [contracts/library/UtilLib.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/library/UtilLib.sol) | 143 | Perform check on msg.sender, check for roles and get operator data given validatorID | []() |
+| [contracts/library/ValidatorStatus.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/library/ValidatorStatus.sol) | 9 | List of stader defined validator status | []() |
 
 # Additional Context
 
@@ -84,14 +84,22 @@ Focus areas - vaultProxy, vaultFactory, PoolSelector, staderOracle contracts
 
 # Tests
 
-*Provide every step required to build the project from a fresh git clone, as well as steps to run the tests with a gas report.* 
+Installing foundry:
 - install foundry `curl -L https://foundry.paradigm.xyz | bash `
 - extra step for macOS `brew install libusb`
 - run `foundryup`
-- npm install // to install hardhat-foundry plugin
-- forge install // to install submodule dependencies
-- forge build // to build all contracts
-- forge test
-- forge coverage
 
-*Note: Many wardens run Slither as a first pass for testing.  Please document any known errors with no workaround.* 
+Using the test suite:
+```bash
+# to install hardhat-foundry plugin
+npm install 
+# to install submodule dependencies
+forge install 
+# to build all contracts
+forge build
+forge test
+forge test --gas-report
+forge coverage
+```
+
+*Note: a `slither.config.json` file is present and exclude findings and files that do not align with our areas of interest*
