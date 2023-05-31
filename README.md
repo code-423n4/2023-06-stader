@@ -69,6 +69,7 @@ Automated findings output for the audit will be posted [here](#) within 24 hours
 *Please provide some context about the code being audited, and identify any areas of specific concern in reviewing the code. (This is a good place to link to your docs, if you have them.)*
 
 Please focus on vaultProxy, vaultFactory, and PoolSelector.
+https://miro.com/app/board/uXjVMDv5XKo=/
 
 # Scope
 
@@ -141,5 +142,13 @@ Please focus on vaultProxy, vaultFactory, and PoolSelector.
 # Tests
 
 *Provide every step required to build the project from a fresh git clone, as well as steps to run the tests with a gas report.* 
+- install foundry `curl -L https://foundry.paradigm.xyz | bash `
+- extra step for macOS `brew install libusb`
+- run `foundryup`
+- npm install // to install hardhat-foundry plugin
+- forge install // to install submodule dependencies
+- forge build // to build all contracts
+- forge test
+- forge coverage
 
 *Note: Many wardens run Slither as a first pass for testing.  Please document any known errors with no workaround.* 
