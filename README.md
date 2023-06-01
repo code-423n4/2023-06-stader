@@ -1,6 +1,12 @@
 # Stader Labs audit details
 - Total Prize Pool: $93,000 USDC
-[ 🐺 C4 staff to add detailed pool breakdown ]
+    - High/Medium awards: $83,000 USDC
+    - Bot Race report awards: $7,500 USDC
+    - QA report awards: $2,500
+    - Gas report awards: $2,500
+    - Judge award: $9,860
+    - Lookout awards: $6640
+    - Scout award: $500
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/contests/2023-06-stader-contest/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
@@ -9,11 +15,11 @@
 
 ## Automated Findings / Publicly Known Issues
 
-Automated findings output for the audit can be found [here](add link to report) within 24 hours of audit opening.
+Automated findings output for the audit will be added [here](#) within 24 hours of audit opening.
 
 *Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
 
-Additional Known Issues
+### Additional Known Issues
 - SD Token Spot Price Manipulation{StaderOracle.sol, SDCollateral.sol} -- avoided through TWAP of 24 hours
 - Submit Functions Are Susceptible To Front Running When Trusted Nodes Are Removed {StaderOracle.sol} 
 - upper bound on penalty does not exist {penalty.sol} and is intented
@@ -22,7 +28,7 @@ Additional Known Issues
 - BidIncrement Can Be Changed Using UpdateBidIncrement() Which Affects Ongoing Auctions {Auction.sol} is known and acknowledged
 - TrustedNode Cannot Update Incorrectly Submitted Oracle Details {StaderOracle.sol} is known and acknowledged 
 
-Below are known issue of Slither, We encourage reporting any bugs around them and not just the errors
+Below are known issues of Slither; we encourage reporting any bugs around them and not just the errors:
 - sends eth to arbitrary user 
 - Reentrancy in StaderStakePoolsManager.depositETHOverTargetWeight()
 - State variables written after the call(s) {contracts/StaderStakePoolsManager.sol#241}, {contracts/PermissionlessNodeRegistry.sol#218}
@@ -39,7 +45,8 @@ Our structure includes a permissionless pool, where anyone can participate and o
 - Deposit blog - https://blog.staderlabs.com/ethx-deposits-bda0f62d8ed8
 - Reward Withdrawal blog - https://blog.staderlabs.com/ethx-rewards-withdrawal-530c50d480c9
 
-Focus areas - vaultProxy, vaultFactory, PoolSelector, staderOracle contracts
+## Focus areas
+vaultProxy, vaultFactory, PoolSelector, staderOracle contracts
 
 # Scope
 
