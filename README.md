@@ -13,7 +13,7 @@ Automated findings output for the audit can be found [here](add link to report) 
 
 *Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
 
-
+Additional Known Issues
 - SD Token Spot Price Manipulation{StaderOracle.sol, SDCollateral.sol} -- avoided through TWAP of 24 hours
 - Submit Functions Are Susceptible To Front Running When Trusted Nodes Are Removed {StaderOracle.sol} 
 - upper bound on penalty does not exist {penalty.sol} and is intented
