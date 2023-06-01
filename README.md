@@ -19,6 +19,7 @@ ETHx is a multi pool architecture for node operations, designed for decentraliza
 Our structure includes a permissionless pool, where anyone can participate and operate nodes, thereby fostering widespread participation. Alongside this, we also feature a permissioned pool. This is a select group of validators known for their consistent high performance.
 
 - ETHx architecture miro board - https://miro.com/app/board/uXjVMDv5XKo=/
+- ETHx smart contract functions documentation - https://docs.google.com/spreadsheets/d/1IjJ5z9oi9I-ejdRCitJsTT1on0WwjoKlbvurCtlB1KA/edit#gid=643619608
 - Node Operator Onboarding blog - https://blog.staderlabs.com/node-operator-onboarding-ced79d35bd7b
 - Deposit blog - https://blog.staderlabs.com/ethx-deposits-bda0f62d8ed8
 - Reward Withdrawal blog - https://blog.staderlabs.com/ethx-rewards-withdrawal-530c50d480c9
