@@ -9,10 +9,20 @@
 
 ## Automated Findings / Publicly Known Issues
 
-Automated findings output for the audit will be posted [here](#) within 24 hours of audit opening.
+- SD Token Spot Price Manipulation{StaderOracle.sol, SDCollateral.sol} -- avoided through TWAP of 24 hours
+- Submit Functions Are Susceptible To Front Running When Trusted Nodes Are Removed {StaderOracle.sol} 
+- upper bound on penalty does not exist {penalty.sol} and is intented
+- Partial DOS in requestWithdraw {userWithdrawalManager.sol} when user non redeemed request count crosses 'maxNonRedeemedUserRequestCount' is known and has a work around
+- whitelisted operator {permissionedNodeRegistry.sol} retains permission after deactivation is a known issue and there is no impact due to this
+- BidIncrement Can Be Changed Using UpdateBidIncrement() Which Affects Ongoing Auctions {Auction.sol} is known and acknowledged
+- TrustedNode Cannot Update Incorrectly Submitted Oracle Details {StaderOracle.sol} is known and acknowledged 
 
-*Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
-[ ⭐️ SPONSORS ADD INFO HERE ]
+Below are known issue of Slither, We encourage reporting any bugs around them and not just the errors
+- sends eth to arbitrary user 
+- Reentrancy in StaderStakePoolsManager.depositETHOverTargetWeight()
+- State variables written after the call(s) {contracts/StaderStakePoolsManager.sol#241}, {contracts/PermissionlessNodeRegistry.sol#218}
+- Reentrancy in PermissionlessNodeRegistry.markValidatorReadyToDeposit(bytes[],bytes[],bytes[])
+- Reentrancy in PermissionedPool.stakeUserETHToBeaconChain()
 
 # Overview
 ETHx is a multi pool architecture for node operations, designed for decentralization, scalability, and resilience. This design is integral to our ability to democratize node operations and adapt to increasing demand.
@@ -53,9 +63,6 @@ Focus areas - vaultProxy, vaultFactory, PoolSelector, staderOracle contracts
 | [contracts/factory/VaultFactory.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/factory/VaultFactory.sol) | 77 | Deploys vaultProxy implementation via clones | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
 | [contracts/library/UtilLib.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/library/UtilLib.sol) | 143 | Perform check on msg.sender, check for roles and get operator data given validatorID | []() |
 | [contracts/library/ValidatorStatus.sol](https://github.com/code-423n4/2023-06-stader/blob/main/contracts/library/ValidatorStatus.sol) | 9 | List of stader defined validator status | []() |
-
-# Additional Context
-
 
 ## Scoping Details 
 ```
