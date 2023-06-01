@@ -1,11 +1,11 @@
 # Stader Labs audit details
-- Total Prize Pool: $93,000 USDC
-    - High/Medium awards: $83,000 USDC
-    - Bot Race report awards: $7,500 USDC
-    - QA report awards: $2,500
-    - Gas report awards: $2,500
-    - Judge award: $9,860
-    - Lookout awards: $6640
+- Total Prize Pool: $100,000 USDC
+    - High/Medium awards: $72,625 USDC
+    - Bot Race report awards: $6,225 USDC
+    - QA report awards: $2,075
+    - Gas report awards: $2,075
+    - Judge award: $9,960
+    - Lookout awards: $6,540
     - Scout award: $500
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/contests/2023-06-stader-contest/submit)
