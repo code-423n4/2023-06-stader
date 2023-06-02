@@ -27,6 +27,10 @@ Automated findings output for the audit will be added [here](#) within 24 hours 
 - whitelisted operator {permissionedNodeRegistry.sol} retains permission after deactivation is a known issue and there is no impact due to this
 - BidIncrement Can Be Changed Using UpdateBidIncrement() Which Affects Ongoing Auctions {Auction.sol} is known and acknowledged
 - TrustedNode Cannot Update Incorrectly Submitted Oracle Details {StaderOracle.sol} is known and acknowledged 
+- SD Price Manipulation if Minority Oracle clients are malicious. Here (sdPrice oracle) Minority is n/3 clients, Resolution is to restrict sd price submission to current sd reportable block {staderOracle.sol}
+- No Consensus if trusted nodes are removed before consensus is known and mitigation is to have cooling Period between add/removal of trusted nodes {staderOracle.sol}
+- Infinite loop situation in {PermissionedNodeRegistry.sol} whenever using 'continue' inside loop, line 208,228.  Mitigation is to increment loop counter i, before 'continue'.
+- Infinite loop situation in {PermissionedPool.sol} whenever using 'continue' inside loop, line 103, Mitigation is to increment loop counter i, before 'continue'
 
 Below are known issues of Slither; we encourage reporting any bugs around them and not just the errors:
 - sends eth to arbitrary user 
