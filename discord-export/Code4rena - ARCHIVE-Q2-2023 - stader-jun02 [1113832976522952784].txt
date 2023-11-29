@@ -1,0 +1,989 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-Q2-2023 / stader-jun02
+==============================================================
+
+[06/01/2023 14:19] kartoonjoy (pinned)
+👋 Hello and welcome to the audit channel for the $100,000 USDC **Stader Labs** audit!
+
+📆 Audit opens 06/02/2023 20:00 (20:00 UTC) and runs through 06/09/2023 20:00 (20:00 UTC) (7 days).
+
+Please give a warm welcome to the Stader Labs team, particularly @Sanjay Y and @galacticminter, who will be available for questions either here in the channel or via DM in the **IST and PST timezone(s)**.
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this audit, consider enabling notifications for this channel. 🐺 ⏰
+
+Audit Page: https://code4rena.com/contests/2023-06-stader-labs
+
+
+[06/01/2023 14:21] kartoonjoy
+:hearteyesrobot: Automated findings output for the audit will be posted within 24 hours of audit opening. :hearteyesrobot:
+
+
+[06/01/2023 14:21] kartoonjoy
+Pinned a message.
+
+
+[06/01/2023 14:22] kartoonjoy
+📢 Let's limit conversation until the audit begins. Please direct any questions / comments to the #🐺wardens or #❓questions channels. Thanks!
+
+
+[06/02/2023 20:44] galacticminter
+Hi Folks! 
+@Sanjay Y and I are blockchain developers are Stader. We are good point of contacts to ask questions, get clarification on architecture related to the smart contracts. I am excited to interact with all of you. Happy bug-bashing! 🙂
+
+{Reactions}
+👋 (11) ✌️ 
+
+[06/02/2023 22:13] sovaslava9
+Hello. Why so long list of known bugs? Why you didnt  fix them?)
+
+
+[06/02/2023 22:15] galacticminter
+Most of these are fixed and under audits. Just not part of code4rena codebase.  Some of the known issues are explanatory so wardens don't waste their time on digging through certain angles.
+
+{Reactions}
+👍🏻 (2) 
+
+[06/03/2023 00:28] thekmj
+The docs looks amazingly well-prepared tbh
+
+
+[06/03/2023 11:02] cloudellie (pinned)
+Wardens - please note that the automated findings output (AKA the winning bot race report 🏆, submitted by @IllIllI) is posted below. 
+
+**These are considered publicly known issues and are not eligible for awards.**
+
+🤖 Automated findings: 
+https://gist.github.com/CloudEllie/9a06bd326750de18279979886ed93ffd
+
+📄 Code4rena submission guidelines and automated findings policy: 
+https://docs.code4rena.com/roles/wardens/submission-policy#automated-findings-ineligible
+
+The above link has also been added to the contest `README`.
+
+{Embed}
+https://gist.github.com/CloudEllie/9a06bd326750de18279979886ed93ffd
+Stader Labs - Code4rena bot report (by IllIllI-bot)
+Stader Labs - Code4rena bot report (by IllIllI-bot) - IllIllI-bot-report.md
+Code4rena - ARCHIVE-Q2-2023 - stader-jun02 [1113832976522952784].txt_Files/gist-og-image-17482.png
+
+{Embed}
+https://docs.code4rena.com/roles/wardens/submission-policy
+Submission policy
+
+
+[06/03/2023 11:02] cloudellie
+Pinned a message.
+
+
+[06/03/2023 14:04] sovaslava9
+Some test are fail oO Failing tests:
+Encountered 2 failing tests in test/foundry_tests/PermissionedNodeRegistry.t.sol:PermissionedNodeRegistryTest
+[FAIL. Reason: You have an active prank already. Counterexample: calldata=0x159810c70000000000000000000000000000000000000000000000000000000000000bc3, args=[3011]] test_getAllActiveValidatorsWithZeroPageNumber(uint256) (runs: 0, μ: 0, ~: 0)
+[FAIL. Reason: You have an active prank already.] test_markReadyToDepositValidator() (gas: 1711923)
+
+Encountered 2 failing tests in test/foundry_tests/PermissionlessNodeRegistry.t.sol:PermissionlessNodeRegistryTest
+[FAIL. Reason: You have an active prank already. Counterexample: calldata=0x6b337c1a000000000000000000000000000000000000000000000000000000000000025a000000000000000000000000000000000000000000000000000000000000188b, args=[602, 6283]] test_getAllActiveValidators(uint256,uint256) (runs: 0, μ: 0, ~: 0)
+[FAIL. Reason: You have an active prank already. Counterexample: calldata=0x159810c700000000000000000000000000000000000000000000000000000000000005a7, args=[1447]] test_getAllActiveValidatorsWithZeroPageNumber(uint256) (runs: 0, μ: 0, ~: 0)
+
+
+[06/03/2023 15:00] sovaslava9
+@Sanjay Y  DMed you
+
+{Reactions}
+👍 
+
+[06/03/2023 15:28] SanjayY#1702
+let me take a look, will get back on this. Thanks for pointing out
+
+
+[06/03/2023 15:45] SanjayY#1702
+Hey @SovaSlava, all the test are working for me, i am doing forge test. Can you please lmk what command you are running
+
+
+[06/03/2023 16:06] christina0494
+I had the same issue and fixed it by inserting `vm.stopPrank();` in the failing tests every time before a new prank is started. Some fuzz tests are still failing though.
+
+
+[06/03/2023 16:38] SanjayY#1702
+Hey can you please share the command you are using to run tests, i am able to run all by doing forge test
+
+
+[06/03/2023 17:09] christina0494
+also using `forge test` or `forge test -vvv`.  I think it is just the nature with fuzz tests that they will often pass many times in a row and then fail on a counterexample. One test failed once and has been going through ever since. These two are failing every time:  ```Encountered 2 failing tests in test/foundry_tests/PermissionlessNodeRegistry.t.sol:PermissionlessNodeRegistryTest
+[FAIL. Reason: EvmError: Revert Counterexample: calldata=0x6b337c1a0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000081e, args=[1, 2078]] test_getAllActiveValidators(uint256,uint256) (runs: 0, μ: 0, ~: 0)
+[FAIL. Reason: EvmError: Revert Counterexample: calldata=0x159810c70000000000000000000000000000000000000000000000000000000000001ab2, args=[6834]] test_getAllActiveValidatorsWithZeroPageNumber(uint256) (runs: 0, μ: 0, ~: 0)```.  (Both reverting with EVM::OutOfFund error). I don't know if that is valid counterexample though because of the `(runs: 0, μ: 0, ~: 0)` and also because I haven't understood the codebase & tests enough.
+
+
+[06/03/2023 17:30] SanjayY#1702
+Cann't do much for the failing test as i am not able to reproduce these. But please go through the code base and lmk if you need any help understanding the architecture. Happy to help
+
+{Reactions}
+👍🏻 
+
+[06/03/2023 18:12] christina0494
+updating to the latest foundry version helped a lot 😅
+
+
+[06/03/2023 18:17] SanjayY#1702
+all tests working now?
+
+
+[06/03/2023 18:28] christina0494
+Almost. ` StaderInsuranceFundTest::test_depositFund` is still failing *sometimes*,  here's an example: ```[FAIL. Reason: Assertion failed. Counterexample: calldata=0x3c69f48d000000000000000000000000739aa6e1e9ed053e8f6bdbc7eb63dd053de9b3cc000000000000000000000000c7183455a4c133ae270771860664b6b7ec320bb1, args=[659982790919253294404644661417924099095103386572 [6.599e47], 0xc7183455a4C133Ae270771860664b6B7ec320bB1]] test_depositFund(uint256,address) (runs: 88, μ: 26939, ~: 27092)
+Logs:
+  Error: a == b not satisfied [uint]
+        Left: 659982790919253294404644661417924099095103386572
+       Right: 0
+
+Traces:
+  [36793] StaderInsuranceFundTest::test_depositFund(659982790919253294404644661417924099095103386572 [6.599e47], TransparentUpgradeableProxy: [0xc7183455a4C133Ae270771860664b6B7ec320bB1]) 
+    ├─ [0] VM::assume(true) [staticcall]
+    │   └─ ← ()
+    ├─ [0] VM::deal(TransparentUpgradeableProxy: [0xc7183455a4C133Ae270771860664b6B7ec320bB1], 659982790919253294404644661417924099095103386572 [6.599e47]) 
+    │   └─ ← ()
+    ├─ [0] VM::prank(TransparentUpgradeableProxy: [0xc7183455a4C133Ae270771860664b6B7ec320bB1]) 
+    │   └─ ← ()
+    ├─ emit log(: Error: a == b not satisfied [uint])
+    ├─ emit log_named_uint(key:       Left, val: 659982790919253294404644661417924099095103386572 [6.599e47])
+    ├─ emit log_named_uint(key:      Right, val: 0)
+    ├─ [0] VM::store(VM: [0x7109709ECfa91a80626fF3989D68f67F5b1DD12D], 0x6661696c65640000000000000000000000000000000000000000000000000000, 0x0000000000000000000000000000000000000000000000000000000000000001) 
+    │   └─ ← ()
+    ├─ [8535] TransparentUpgradeableProxy::depositFund{value: 659982790919253294404644661417924099095103386572}() 
+    │   ├─ [1243] StaderInsuranceFund::depositFund() [delegatecall]
+    │   │   ├─ emit ReceivedInsuranceFund(amount: 659982790919253294404644661417924099095103386572 [6.599e47])
+    │   │   └─ ← ()
+    │   └─ ← ()
+    └─ ← ()
+```
+
+
+[06/03/2023 18:39] christina0494
+I think this is just due to a weird contract being used as depositor, there is no way this function reverts ```   function depositFund() external payable override {
+        emit ReceivedInsuranceFund(msg.value);
+    }```
+
+
+[06/03/2023 18:40] SanjayY#1702
+I got the issue, whenever that input 'anyone' address is equal to iFund contract address it will fail
+
+
+[06/03/2023 18:42] SanjayY#1702
+try putting this at line 71 
+vm.assume(anyone != address(0) && anyone != address(proxyAdmin) && anyone != address(iFund));|
+
+
+[06/03/2023 18:52] christina0494
+Ok all cleared up, thanks for your help!
+
+{Reactions}
+🙏 
+
+[06/03/2023 20:46] sovaslava9
+test files PermissionlessNodeRegistry.t.sol and PermissionedNodeRegistry.t.sol both import contracts/PermissionlessNodeRegistry.sol, but second test file should  import PermissionedNodeRegistry. So from PermissionedNodeRegistry.t.sol I cant call nodeRegistry.deactivateNodeOperator
+
+
+[06/03/2023 21:19] sovaslava9
+Where will user be able to see operator's names?
+
+
+[06/04/2023 01:22] galacticminter
+If you are talking about Permissionedpool, here is the list - https://snapshot.org/#/staderdao.eth/proposal/0x8f850a34f7e3abefdefe8411b208d250ac389b5412d95d032aaab5f6e24f7f5d
+
+For permissionlesspool, anyone can be an operator as long 4 eth and 0.4eth worth of SD tokens are provided.
+
+
+[06/04/2023 01:22] galacticminter
+oracle operators are still being finalized
+
+
+[06/04/2023 06:53] SanjayY#1702
+Hey please try to attach screenshots for these, As i can see there is no import of PermissionlessNodeRegistry.sol in PermissionedNodeRegistry.t.sol file
+
+{Attachments}
+Code4rena - ARCHIVE-Q2-2023 - stader-jun02 [1113832976522952784].txt_Files/Screenshot_2023-06-04_at_12.22.44_PM-AFEAC.png
+
+
+[06/04/2023 12:10] kutugu
+Why is predeposit needed to detect frontrun, any document?
+
+
+[06/04/2023 12:31] sovaslava9
+on your url - I see only addresses of pools.. not names..
+
+
+[06/04/2023 12:56] sovaslava9
+Explain please, " // cannot use safeERC20 as this contract is an upgradeable contract". SDCollateral.sol:withdraw()
+
+
+[06/04/2023 13:18] SanjayY#1702
+These are the names of permissioned operators, same url
+
+{Attachments}
+Code4rena - ARCHIVE-Q2-2023 - stader-jun02 [1113832976522952784].txt_Files/Screenshot_20230604-184735-37F56.png
+
+
+[06/04/2023 13:24] SanjayY#1702
+Withdrawal credentials are set  by the first deposit on the beacon chain, that's why we are doing predeposit of 1 ETH (can't do less than this)  to check if the withdrawal credentials is set to stader smart contract if not we mark the validator as front run
+
+{Reactions}
+👍 
+
+[06/04/2023 19:26] defi_wind
+using `safeERC20` makes contract not upgrade-safe
+And we cannot use `safeERC20Upgradeable`  as staderToken is not upgradeable.
+https://github.com/OpenZeppelin/openzeppelin-upgrades/issues/455
+Hope it helps!
+
+{Embed}
+https://github.com/OpenZeppelin/openzeppelin-upgrades/issues/455
+Usage of SafeERC20 makes contract not upgrade-safe · Issue #455 · O...
+SafeERC20 from the Openzepelin contracts is a very popular Lib. However, using it in an upgradable contracts makes them non upgrade-safe according to the plugin. More specifically, the following er...
+Code4rena - ARCHIVE-Q2-2023 - stader-jun02 [1113832976522952784].txt_Files/455-B22BF
+
+
+[06/04/2023 21:59] dontonka
+hello, sorry if this has been ask already, which contract represent the SD token?
+
+
+[06/04/2023 22:37] sovaslava9
+Hello. Why there is check " totalRewards > staderConfig.getRewardsThreshold()" in ValidatorWithdrawalVault.sol:distributeRewards() ? what should do Operator, if this check cause true? (tx will revert). change config? if yes, i dont understand why check there is
+
+
+[06/05/2023 02:58] galacticminter
+SD token is at https://etherscan.io/address/0x30d20208d987713f46dfd34ef128bb16c404d10f
+
+{Embed}
+https://etherscan.io/address/0x30d20208d987713f46dfd34ef128bb16c404d10f
+Stader Labs: SD Token | Address 0x30d20208d987713f46dfd34ef128bb16c...
+The Contract Address 0x30d20208d987713f46dfd34ef128bb16c404d10f page allows users to view the source code, transactions, balances, and analytics for the contract address. Users can also interact and make transactions to the contract directly on Etherscan.
+Code4rena - ARCHIVE-Q2-2023 - stader-jun02 [1113832976522952784].txt_Files/etherscan-logo-circle-A29B1.jpg
+
+
+[06/05/2023 02:59] galacticminter
+Both consensus layer rewards and "32 bonded ETH" is sent back to the same address (validatorWithdrawalVault). So it becomes important to distinguish whether ETH balance belongs to rewards or staked ETH (that's now withdrawn)
+
+
+[06/05/2023 03:00] galacticminter
+We use rewards threshold to make that distinction.
+
+
+[06/05/2023 03:03] .ellar
+@galacticminter is it okay if I dm you some questions right now?
+
+
+[06/05/2023 03:19] galacticminter
+Yes please go ahead @ELLAR
+
+
+[06/05/2023 09:37] 0xpathfindr
+Hey @SovaSlava  @galacticminter Sent a friend request.
+
+
+[06/05/2023 09:54] bean.eth2
+what is the decimal of `sdPriceInETH` ?
+
+
+[06/05/2023 10:26] SanjayY#1702
+hey, please direct your questions to me and @galacticminter, @SovaSlava is also a warden
+
+{Reactions}
+👍 (2) 
+
+[06/05/2023 10:28] 0xpathfindr
+Thanks, sent you a request
+
+{Reactions}
+👍 
+
+[06/05/2023 10:28] t1moh
+Hi, what is STADER_TREASURY contract in staderConfig?
+
+
+[06/05/2023 10:30] SanjayY#1702
+it is an stader controlled address for receiving protocol share of rewards
+
+{Reactions}
+👍 
+
+[06/05/2023 10:30] SanjayY#1702
+please DM any further questions
+
+
+[06/05/2023 10:33] SanjayY#1702
+Value of sdPriceInEth is in 1e18
+
+{Reactions}
+❤️ 
+
+[06/05/2023 11:36] dontonka
+oh the app is fully live 🤔 on ETH ?
+
+
+[06/05/2023 11:42] defi_wind
+only SD Token is live.
+
+{Reactions}
+👍 
+
+[06/05/2023 11:42] dontonka
+SD token is in scope i assume ?
+
+
+[06/05/2023 11:46] SanjayY#1702
+nope, its not in scope for this contest
+
+
+[06/05/2023 11:48] dontonka
+ah ok, so even if ifound something there it would not be considered?
+
+
+[06/05/2023 11:50] SanjayY#1702
+yes, it will not be considered
+
+{Reactions}
+👍 
+
+[06/05/2023 16:00] dontonka
+what is the requirement to impose a limit in **UWM::requestWithdraw** with `MaxLimitOnWithdrawRequestCountReached`?
+
+
+[06/05/2023 16:24] dontonka
+@SovaSlava ☝️
+
+
+[06/05/2023 16:26] SanjayY#1702
+While claiming request we delete the claimed request, to delete it from the requestIdsByUserAddress map, we need to loop over all the request of that user, this check to restrict maximum non redeemed request make sure that delete operation does not get timed out
+
+
+[06/05/2023 16:27] dontonka
+cool make sense, that's what i thought, but wanted to confirm. ty
+
+{Reactions}
+🙏 
+
+[06/05/2023 16:27] SanjayY#1702
+Please check claim function and inside that deleteRequestId
+
+
+[06/06/2023 11:21] erictee
+Check dm, thanks 🙏
+
+{Reactions}
+👍 
+
+[06/06/2023 18:14] ivok1#4124
+plz chec dm @Sanjay Y
+
+{Reactions}
+👍 
+
+[06/06/2023 22:38] dontonka
+@Sanjay Y and @SovaSlava sent friend request for further DM
+
+
+[06/07/2023 00:18] galacticminter
+Hey guys, I can take questions as well if they are time-sensitive. 
+Sanjay should be available in 2-3 hrs from now
+
+{Reactions}
+🫡 (2) 
+
+[06/07/2023 04:40] defi_wind
+You can direct questions to me as well.
+
+
+[06/07/2023 08:22] sovaslava9
+ok, but why? i dont work in stader. i am warden
+
+
+[06/07/2023 09:19] trustone_
+Is there only 2 pools (permissioned and permissionless) in stader
+
+
+[06/07/2023 09:30] SanjayY#1702
+yes for now, later we will onboard DVT pool
+
+
+[06/07/2023 10:05] trustone_
+stakeUserETHToBeaconChain is different from permissioned node registry and permissionless node registry.
+
+
+[06/07/2023 10:11] trustone_
+In the permissioned node registry, we distributed validators to operators evenly on average. However, in the permissionless node registry, we distributed validators in the order of registration. Consequently, in the latter scenario, validators may be assigned to certain operators more intensively.
+
+
+[06/07/2023 10:11] trustone_
+How do you think?
+
+
+[06/07/2023 10:43] SanjayY#1702
+It is by design, for permissionless it is  FIFO, For permissioned we follow round robin approach
+
+
+[06/07/2023 10:44] SanjayY#1702
+@trustOne please DM any further questions
+
+
+[06/07/2023 15:09] doublesharp
+Hi @Sanjay Y I sent a friend request for a quick question thanks!
+
+{Reactions}
+👍 
+
+[06/07/2023 17:52] jgcarv
+@defi_wind  @Sanjay Y  @galacticminter  what's the planned setup for Stade Operator? A multisig of sorts?
+
+
+[06/07/2023 20:23] SanjayY#1702
+OPERATOR role will be a single sig
+
+
+[06/08/2023 11:42] erictee
+Some functions are not found in  `SDCollateral.sol`  as stated in the excel file, is it not yet implemented or removed?
+
+{Attachments}
+Code4rena - ARCHIVE-Q2-2023 - stader-jun02 [1113832976522952784].txt_Files/image-10AD7.png
+
+
+[06/08/2023 11:51] defi_wind
+claimWithdraw and requestWithdraw
+are replaced with `withdraw`
+Missed to update this in doc.
+
+{Reactions}
+👍 
+
+[06/08/2023 17:08] 0xblockhound
+Where can I find this excel?
+
+
+[06/08/2023 17:28] SanjayY#1702
+https://docs.google.com/spreadsheets/d/1IjJ5z9oi9I-ejdRCitJsTT1on0WwjoKlbvurCtlB1KA/edit#gid=643619608
+
+its on the audit page
+
+{Embed}
+https://docs.google.com/spreadsheets/d/1IjJ5z9oi9I-ejdRCitJsTT1on0WwjoKlbvurCtlB1KA/edit
+ETHx Contract Documentation
+sheet
+
+File name,Function name,Description
+Auction,createLot,to create a auction lot of specified amount of sd tokens, callable by anyone
+addBid,for users to place or increase their bid for a specific lot
+claimSD,transfers sd to highest bidder once auction ends
+transferHighestBidToSSPM,transfers ...
+Code4rena - ARCHIVE-Q2-2023 - stader-jun02 [1113832976522952784].txt_Files/ADP-6oGuE7xZSo-oOBAZaXyYwSUrxJdLa22jM5aqnQ-81F7E
+
+
+[06/08/2023 17:30] SanjayY#1702
+This might be outdated for some particular functions as pointed by @defi_wind , Please check code base for clarity
+
+
+[06/08/2023 17:56] 0xblockhound
+Thanks @Sanjay Y 🙂
+
+{Reactions}
+🙌 
+
+[06/08/2023 22:44] ladboy233
+@Sanjay Y
+
+
+[06/08/2023 22:44] ladboy233
+How exactly is the exchange rate calculated?
+
+
+[06/08/2023 22:45] ladboy233
+or it purely depends on the offline bot that submit the exchange rate?
+
+
+[06/09/2023 02:42] SanjayY#1702
+oracle check for ER data via including 
+1. StaderStakePoolManager.sol balance 
+2. Socializing pool balance
+3. PermissionedPool.sol balance
+4. ValidatorWithdrawalVault.sol balance for all active validators 
+5.nodeELRewardVault.sol balance for operators 
+6. validators balance on beacon chain
+
+
+[06/09/2023 06:13] parashar
+So totalEth in exchange Rate is sum of all these balances, or some factor is applied?
+
+
+[06/09/2023 07:05] SanjayY#1702
+protocol commission and node operator commission is removed from Socialising Pool , ValidatorWithdrawalVault, nodeELRewardVault, beacon chain reward. in short wherever we are getting reward we are excluding protocol and operator share from totalEth balance
+
+
+[06/09/2023 09:07] praise95
+@Sanjay Y trying to wrap my head around staderConfig.getRewardsThreshold().. what's it all 'bout?
+
+
+[06/09/2023 09:08] SanjayY#1702
+@Auditorpraise🦅 take a look at this, we set RewardsThreshold as 8 ETH
+
+
+[06/09/2023 09:10] praise95
+okay, thanks
+
+
+[06/09/2023 14:20] 0xbtk
+@Sanjay Y @galacticminter who can I DM?
+
+
+[06/09/2023 14:23] SanjayY#1702
+DM me
+
+
+[06/09/2023 14:25] 0xbtk
+Sent you a request
+
+{Reactions}
+👍 
+
+[06/09/2023 18:58] dwward3n
+guys, why is the pubkey and signature length 48, 96 respectively?
+
+
+[06/09/2023 19:00] 0xprinc
+I got a vulnerability but I am confused whether it is medium or high, how to confirm
+
+
+[06/09/2023 19:00] 0xprinc
+?
+
+
+[06/09/2023 19:01] dwward3n
+haha, how about submiting as high?
+
+
+[06/09/2023 19:02] 0xprinc
+Will they consider it if its a medium
+
+
+[06/09/2023 19:02] 0xprinc
+But submitted as high
+
+
+[06/09/2023 19:02] dwward3n
+sure, judges will correct it
+
+
+[06/09/2023 20:00] tallo#5415
+fun contest
+
+
+[06/09/2023 20:00] tallo#5415
+spent 4 hours writing a beautiful poc and writeup for my high
+
+
+[06/09/2023 20:01] tallo#5415
+only to see that it was a known issue
+
+{Reactions}
+😀 (3) 😄 😅 (3) 
+
+[06/09/2023 20:02] C4
+**🚨 AUDIT ALERT**
+
+@🐺wardens The **Stader Labs** audit is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: The sponsor team and judge will review the findings over the next couple of weeks. Keep an eye on #📢announcements for regular updates on how the audit is progressing through awarding 🤑🏆, judging 🧑‍⚖️ and reporting 📜. Feel free to ping a Contest-Admin if you have questions along the way!
+
+{Reactions}
+🔥 (5) ❤️ (2) 🫡 (2) 
+
+[06/09/2023 20:03] eme0242
+Thanks a lot for your help @Sanjay Y 🙂
+
+{Reactions}
+☝🏼 (2) 🙌 
+
+[06/09/2023 20:05] Okojegele#1646
+Hello
+
+
+[06/09/2023 20:05] Okojegele#1646
+Hello
+
+
+[06/09/2023 20:05] c145h
+This project, especially, had many known issues
+
+
+[06/09/2023 20:05] c145h
+I failed this
+
+
+[06/10/2023 02:24] SanjayY#1702
+Thank you everyone for actively participating!🙏
+
+{Reactions}
+🔥 (4) ❤️ (2) 
+
+[06/11/2023 07:19] josephdara
+It did
+
+
+[06/11/2023 17:57] 0xdjango
+Is the findings repo still hidden?
+
+
+[06/11/2023 19:03] 0x73696d616f
+I think I submitted a finding of stader on the base audit, could anyone check this?
+
+
+[06/12/2023 11:28] c145h
+oh, for sure hidden
+or can backstage roles see findings repo right after contest ending?
+
+
+[06/12/2023 11:30] c145h
+I can't stand missing 1 medium
+
+
+[06/12/2023 11:49] 0xdjango
+Yeah backstage can see the findings after contests end. Usually pretty quickly
+
+
+[06/12/2023 12:01] nftko1111
+:4739_Skeletor:
+
+
+[06/12/2023 20:45] jgcarv
+What does backstage mean? Like, can all registered wardens access the backstage?
+
+
+[06/12/2023 20:49] dadekuma
+https://docs.code4rena.com/roles/certified-contributors/backstage-wardens
+
+{Reactions}
+10_10 (2) 
+
+[06/13/2023 11:03] dwward3n
+Started a thread.
+
+
+[06/26/2023 05:42] shealtielanz
+how can I see reports that have been submitted, via backstage
+
+
+[06/26/2023 05:43] shealtielanz
+I already got it
+
+
+[06/26/2023 07:42] 0xsorrynotsorry
+Just check the C4 GH repos. You will see the findings repo of the completed contests
+
+{Reactions}
+👍 
+
+[06/27/2023 16:47] tallo#5415
+how many submissions were there?
+
+
+[07/03/2023 17:38] praise95
+Wen?
+
+{Reactions}
+👀 (5) 
+
+[07/06/2023 16:00] raihan3727
+🧐
+
+
+[07/08/2023 05:31] 0x11singh99
+When we expect results  ?
+
+
+[07/08/2023 05:32] 0x11singh99
+Any update ?
+
+
+[07/08/2023 19:14] josephdara
+StaderETH just launched on ImmuneFi 👀👀
+The results  here should come soon
+
+{Reactions}
+👀 (2) ✅ 
+
+[07/08/2023 20:48] thebrittfactor
+Yes! We are working through awarding. It should be posted in #📢announcements soon ☺️
+
+{Reactions}
+🔥 (7) C4Keycap (6) 
+
+[07/10/2023 14:52] SanjayY#1702
+Hi folks, as @thebrittfactor | C4 said, the report is in the final stage.
+
+I am happy to announce that we are live on the mainnet, please go and check us out, run nodes and enjoy early incentives. 
+https://twitter.com/staderlabs_eth/status/1678403779975163908?s=20
+
+informing here as you guys have audited the code and knows very well about this project
+
+{Embed}
+Stader Ethereum (@staderlabs_eth)
+https://twitter.com/staderlabs_eth/status/1678403779975163908?s=20
+🚨 We’re live on mainnet.
+
+ETHx is now yours!
+
+As early stakers, get $1M in launch incentives.
+
+▻ 1.5x staking boost (first 30 days)
+▻ $800k in upcoming LP rewards
+▻ Exclusive rewards for DAOs & communities
+
+Stake now!
+
+🔗 https://t.co/UZRcCaAKZE
+Code4rena - ARCHIVE-Q2-2023 - stader-jun02 [1113832976522952784].txt_Files/FGpncRjp2nI17Fr0-D4EC8.jpg
+Twitter
+
+{Reactions}
+💪 (12) 🚀 (8) 🫡 (6) 
+
+[07/12/2023 07:12] 0x4non
+:4739_Skeletor:
+
+{Reactions}
+4739_Skeletor (5) 👽 (4) C4Keycap (3) 
+
+[07/13/2023 05:03] 0x11singh99
+still waiting🧐
+
+
+[07/13/2023 06:36] josephdara
+Same here. Today makes it 6 days since we got the "soon" update.
+
+{Reactions}
+😅 
+
+[07/13/2023 07:26] praise95
+chill fellas 😅
+
+
+[07/13/2023 08:38] bean.eth2
+summer time ~
+
+
+[07/13/2023 09:08] turvec_dev
+https://tenor.com/view/waiting-gif-23395435
+
+{Embed}
+https://tenor.com/view/waiting-gif-23395435
+Code4rena - ARCHIVE-Q2-2023 - stader-jun02 [1113832976522952784].txt_Files/waiting-97BDA.png
+
+{Reactions}
+😴 
+
+[07/13/2023 09:19] 0xprinc
+Guys, we can see whether the submissions we did are entertained or not
+
+
+[07/13/2023 09:19] 0xprinc
+By seeing the audited code on immunefi
+
+
+[07/13/2023 09:56] t1moh
+Or calculate the payout using backstage role)
+
+
+[07/13/2023 10:02] josephdara
+I guess that depend on the num of valid submissions
+
+
+[07/13/2023 11:34] 0xprinc
+how can I get that ?
+
+
+[07/13/2023 11:48] t1moh
+https://docs.code4rena.com/roles/certified-contributors/backstage-wardens
+
+{Embed}
+https://docs.code4rena.com/roles/certified-contributors/backstage-wardens
++Backstage wardens
+
+
+[07/13/2023 13:36] cloudellie
+Ran into a snag with this one - sorry, all. I expect awards will be posted today or tomorrow, just waiting on a couple of final inputs.
+
+{Reactions}
+thankyou (8) hi5 (7) 4739_Skeletor (4) code4rena (4) 
+
+[07/14/2023 09:54] josephdara
+Damn. Checked it out
+
+
+[07/14/2023 18:44] thebrittfactor
+🤑 🎉  Awards for **Stader Labs**:
+
+$12,289.75 USDC » @rvierdiiev 
+$8,210.53 USDC » @ordinary 
+$6,286.76 USDC » @bin2chen
+$6,173.11 USDC » @etherhood 
+$6,138.26 USDC » @JGcarv 
+$3,465.79 USDC » @0xWaitress  
+$3,059.30 USDC » @DadeKuma 
+$2,772.43 USDC » @Co0nan 
+$2,676.76 USDC » @broccolirob 
+$2,328.85 USDC » @sces60107 | GimelSec 
+$2,220.63 USDC » @SovaSlava 
+$2,115.60 USDC » @ksk2345 
+$2,080.66 USDC » @0x70C9 
+$2,077.61 USDC » @hals 
+$1,855.13 USDC » @Noam Yakov 
+$1,855.13 USDC » @ChrisTina 
+$1,836.71 USDC » @T1MOH 
+$1,743.35 USDC » @code-cipher 
+$1,224.12 USDC » @LaScaloneta
+$908.29 USDC » @peanuts 
+$857.93 USDC » @trustOne 
+$704.54 USDC »  @josephdara 
+$464.35 USDC » @0xhacksmithh 
+$330.02 USDC » @JCN 
+$272.43 USDC » @Sathish9098 
+$253.86 USDC » @SM3_SS 
+$253.86 USDC » @c3phas 
+$253.86 USDC » @0xSmartContract 
+$210.49 USDC » @Rolezn 
+$210.49 USDC » @0xcatellatech 
+$152.63 USDC » @tallo 
+$120.84 USDC » @Jaraxxus775  
+$102.27 USDC » @Deps 
+$102.27 USDC » @djxploit  
+$102.27 USDC » @martin | Founder @ ShieldifySec 
+$53.42 USDC » @piyushshukla599  
+$50.36 USDC » @turvy_fuzz 
+$41.33 USDC » @Madalad  
+$40.19 USDC » @matrix_0wl  
+$40.19 USDC » @SAAJ 
+$40.19 USDC » @mgf15 
+$40.19 USDC » @naman1778 
+$40.19 USDC » @ernestognw 
+$40.19 USDC » @NiSeR 
+$31.80 USDC » @kutu 
+$31.80 USDC » @Hama 
+$31.80 USDC » @saneryee 
+$31.80 USDC » @whimints 
+$31.80 USDC » @Bauchibred 
+$31.80 USDC » @EricTee  
+$31.80 USDC » @Breeje 
+$31.80 USDC » @MohammedRizwan  
+$21.62 USDC » @Arman123 
+$21.62 USDC » @sebghatullah 
+$21.62 USDC » @K42 Ψ 
+$21.62 USDC » @David Giladi 
+$21.62 USDC » @koxuan 
+$21.62 USDC » @Rageur  
+$21.62 USDC » @Raihan 
+$21.62 USDC » @SAQ 
+$21.62 USDC » @petrichor🦖 
+$21.62 USDC » @Tomio  
+$21.62 USDC » @blackhole 
+$18.57 USDC » @tsvetanovv 
+$18.57 USDC » @Santiago Moreno  
+$18.57 USDC » @solsaver 
+$18.57 USDC » @ravikiranweb3 
+$18.57 USDC » @dontonka 
+$18.57 USDC » @hake | SmartSek 
+$18.57 USDC » @0xackerman 
+$18.57 USDC » @hunter_w3b 
+$18.57 USDC » @btk 
+$18.57 USDC » @silviaxyz 
+
+🏁 Findings summary
+
+High risk findings: 5 total, 1 unique
+Med risk findings: 63 total, 14 unique
+Gas reports: 28 
+QA reports: 36 
+
+Awards will be distributed on Polygon within the next week.  Congratulations all!  💸 💸 💸
+
+*Note: If you participated in this audit and don’t see your name on this list, please wait until the report is published and the findings repo is made public to check on your submissions.*
+
+{Reactions}
+hi5 (12) 🎉 (7) ❤️ (7) 👽 C4Keycap (2) 👏🏻 (2) 
+
+[07/14/2023 18:49] dwward3n
+Thank you!
+
+
+[07/14/2023 22:08] tamayonft
+Wow congrats to the winners
+
+
+[07/14/2023 22:09] tamayonft
+There is a way to know why my issue was no validated?
+
+
+[07/14/2023 22:15] praise95
+*Note: If you participated in this audit and don’t see your name on this list, please wait until the report is published and the findings repo is made public to check on your submissions.*
+
+{Reactions}
+hi5 (2) 
+
+[07/15/2023 00:23] bean.eth2
+on 6th not tagged on the announcement >< thank you for the team and wish the best for the Stader protocol
+
+{Reactions}
+🎉 (2) 
+
+[07/15/2023 06:13] 0x11singh99
+@CloudEllie  
+Hi  I submitted 1 gas report. But my report is rejected or not picked.
+
+I just want to know how can I find what was the problem with my report ,small  discussion with judges?  
+And second If someone submit 8 right and 2 wrong gas findings. Then report will be considered for any grade  or rejected  ?
+Criteria on what basis gas report is selected ?
+
+
+[07/15/2023 10:49] hafiztaha
+I also has the same Question ?
+
+
+[07/15/2023 11:29] c3phas.
+You have to wait for the report to be published if you don't have backstage  role
+
+
+[07/15/2023 11:32] c3phas.
+As your report  is graded against  other reports ,if the best report sets the bar too high  your findings might not meet the cut
+
+
+[07/15/2023 11:48] c3phas.
+Criteria  involves a couple  of things, from how much gas you saved, how well your report is formatted etc in some cases invalid issues might lead to the judge deducting some points
+
+
+[07/15/2023 14:07] 0x11singh99
+Deducting some points is ok but overall rejecting whole report just confused me.
+
+
+[07/15/2023 14:29] mrpotatomagic
+how many gas findings were there in your report?
+
+
+[07/15/2023 15:11] 0x11singh99
+5 types of Findings each with  multiple instances
+
+
+[07/15/2023 15:45] mrpotatomagic
+hmm if the findings saved considerable amount of gas and are valid then might be worth seeking feedback once report is published...can't do much about it rn
+
+
+[07/15/2023 16:13] 0x11singh99
+Thanks, Let's wait for report.
+
+
+[07/19/2023 20:08] dash_888
+Report tweet is out https://twitter.com/code4rena/status/1681757602798075906?s=20 🎉 🎉
+
+
+[07/20/2023 01:36] 0x11singh99
+Stader report has come, where can I discuss about my Gas findings now ? @MrPotatoMagic @Dash
+
+
+==============================================================
+Exported 166 message(s)
+==============================================================
